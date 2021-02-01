@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_processor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 18:54:09 by rtoast            #+#    #+#             */
-/*   Updated: 2021/01/30 12:09:27 by rtoast           ###   ########.fr       */
+/*   Updated: 2021/02/01 17:28:23 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_colnum(long long elem)
 	long long		i;
 
 	i = 0;
+	if (elem == 0)
+		return (1);
 	while (elem > 0)
 	{
 		elem = elem / 10;
@@ -61,24 +63,29 @@ int		ft_type_u(list_t *tmp, va_list *ap)
 	elem = va_arg(*ap, unsigned int);
 	colnum = ft_colnum(elem);
 	str = ft_itoa(elem);
+	if (elem == 0 && tmp->precision == 0 && tmp->width == 0)
+		return (tmp->width);
 	if ((colnum >= tmp->precision && colnum >= tmp->width) ||
-			(tmp->precision == -1 && tmp->width == 0))
+		(tmp->precision == -1 && tmp->width == 0))
 		return (ft_putstr_fd(str, 1));
 	if (tmp->precision >= tmp->width)
-		col = ft_write_zero(tmp, colnum);
+		col = ft_write_zero(tmp, colnum, elem);
 	if (tmp->width > tmp->precision && tmp->precision <= colnum)
 	{
 		if (tmp->flag != '-')
-			col = ft_write_skip(tmp, colnum);
-		ft_putstr_fd(str, 1);
+			col = ft_write_skip(tmp, colnum, elem);
+		if (!(tmp->precision == 0 && elem == 0))
+			ft_putstr_fd(str, 1);
 		if (tmp->flag == '-')
-			col = ft_write_skip(tmp, colnum);
+			col = ft_write_skip(tmp, colnum, elem);
 		return (colnum + col);
 	}
 	if (tmp->width > tmp->precision && tmp->precision > colnum)
 		return (ft_write_zeroskip(tmp, colnum, str));
 	return (ft_putstr_fd(str, 1) + col);
 }
+
+
 
 int		ft_processor(list_t *tmp, va_list *ap)
 {

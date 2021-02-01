@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:57:17 by rtoast            #+#    #+#             */
-/*   Updated: 2021/01/30 12:05:38 by rtoast           ###   ########.fr       */
+/*   Updated: 2021/02/01 17:34:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 int main()
 {
 	int i, j;
-	i = printf("|%-6.4u%012cfkldlkfd%0-1.u%10%|\n", 111, 'k', 7878);
-	j = ft_printf("|%-6.4u%012cfkldlkfd%0-1.u%10%|\n", 111, 'k', 7878);
+	i = printf("|%-.12s|\n", "stroka");
+	//j = ft_printf("|%s|\n", "stroka");
 	
-	printf("p = %d\nftp = %d", i, j);
+	//printf("p = %d\nftp = %d", i, j);
 	return (0);
 }

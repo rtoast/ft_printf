@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_proces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 09:23:01 by rtoast            #+#    #+#             */
-/*   Updated: 2021/01/30 12:16:31 by rtoast           ###   ########.fr       */
+/*   Updated: 2021/02/01 17:10:59 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_write_zero(list_t *tmp, int colnum)
+int		ft_write_zero(list_t *tmp, int colnum, unsigned int elem)
 {
 	int	i;
 	int	col;
 
+	if(tmp->precision == 0 && elem == 0)
+		return(0);
 	i = tmp->precision - colnum;
 	col = tmp->precision - colnum;
 	while (i != 0)
@@ -27,7 +29,7 @@ int		ft_write_zero(list_t *tmp, int colnum)
 	return (col);
 }
 
-int		ft_write_skip(list_t *tmp, int colnum)
+int		ft_write_skip(list_t *tmp, int colnum, unsigned int elem)
 {
 	int		i;
 	int		col;
@@ -36,6 +38,8 @@ int		ft_write_skip(list_t *tmp, int colnum)
 	n = ' ';
 	i = tmp->width - colnum;
 	col = tmp->width - colnum;
+	if (tmp->precision == 0 && elem == 0)
+		i++;
 	if (tmp->flag == '0' && tmp->precision == -1)
 		n = '0';
 	while (i != 0)
