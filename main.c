@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:57:17 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/01 17:34:28 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 22:33:25 by rtoast           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int main()
 {
 	int i, j;
-	i = printf("|%-.12s|\n", "stroka");
-	//j = ft_printf("|%s|\n", "stroka");
+	i = ft_printf("|%020.7d|\n", 100);
+	j = printf("|%020.7d|\n", 100);
 	
 	//printf("p = %d\nftp = %d", i, j);
 	return (0);

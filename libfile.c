@@ -6,7 +6,7 @@
 /*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:44:20 by rtoast            #+#    #+#             */
-/*   Updated: 2021/01/30 12:35:57 by rtoast           ###   ########.fr       */
+/*   Updated: 2021/02/06 22:22:50 by rtoast           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,63 +112,25 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-static int		ft_numsymbol(long long n, long long *ne_n, size_t *minus)
+void	ft_putnbr_fd(long long n, int fd)
 {
-	size_t	i;
+	long long		ochen_ne_n;
+	int				ne_n;
+	char			symbol;
 
-	i = 0;
-	if (n < 0)
+	ochen_ne_n = n;
+	if (ochen_ne_n < 0)
+		ochen_ne_n *= -1;
+	while (ochen_ne_n > 9)
 	{
-		*minus = 1;
-		*ne_n *= -1;
+		ne_n = ochen_ne_n % 10;
+		ochen_ne_n /= 10;
+		symbol = ne_n + '0';
+		n = (int)ochen_ne_n;
+		ft_putnbr_fd(n, fd);
+		write(fd, &symbol, 1);
+		return ;
 	}
-	while (n != 0)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
-char			*ft_itoa(long long n)
-{
-	char		*str;
-	size_t		minus;
-	size_t		i;
-	long long	ne_n;
-
-	minus = 0;
-	ne_n = n;
-	if (n == 0)
-		return (ft_strdup("0"));
-	i = ft_numsymbol(n, &ne_n, &minus);
-	i += minus;
-	if ((str = (char *)malloc((i + 1) * sizeof(char))) == NULL)
-		return (NULL);
-	str[i] = '\0';
-	while (ne_n != 0)
-	{
-		--i;
-		str[i] = (ne_n % 10) + '0';
-		ne_n /= 10;
-	}
-	if (minus == 1)
-		str[0] = '-';
-	return (str);
-}
-
-int	ft_putstr_fd(char *s, int fd)
-{
-	size_t	i;
-
-	i = 0;
-	if (s != NULL)
-	{
-		while (s[i] != '\0')
-		{
-			write(fd, &s[i], 1);
-			i++;
-		}
-	}
-	return (i--);
+	symbol = ochen_ne_n + '0';
+	write(fd, &symbol, 1);
 }

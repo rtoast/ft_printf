@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_processor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 18:54:09 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/01 17:28:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/06 22:32:30 by rtoast           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_colnum(long long elem)
 	long long		i;
 
 	i = 0;
+	if (elem < 0)
+		elem *= -1;
 	if (elem == 0)
 		return (1);
 	while (elem > 0)
@@ -56,36 +58,59 @@ int		ft_type_c_pro(list_t *tmp, va_list *ap)
 int		ft_type_u(list_t *tmp, va_list *ap)
 {
 	unsigned int	elem;
-	char			*str;
 	int				colnum;
-	int				col;
+	int				width;
+	int				precision;
+	char			n;
 
-	elem = va_arg(*ap, unsigned int);
+	elem = va_arg(*ap, int);
 	colnum = ft_colnum(elem);
-	str = ft_itoa(elem);
-	if (elem == 0 && tmp->precision == 0 && tmp->width == 0)
-		return (tmp->width);
-	if ((colnum >= tmp->precision && colnum >= tmp->width) ||
-		(tmp->precision == -1 && tmp->width == 0))
-		return (ft_putstr_fd(str, 1));
-	if (tmp->precision >= tmp->width)
-		col = ft_write_zero(tmp, colnum, elem);
-	if (tmp->width > tmp->precision && tmp->precision <= colnum)
-	{
-		if (tmp->flag != '-')
-			col = ft_write_skip(tmp, colnum, elem);
-		if (!(tmp->precision == 0 && elem == 0))
-			ft_putstr_fd(str, 1);
-		if (tmp->flag == '-')
-			col = ft_write_skip(tmp, colnum, elem);
-		return (colnum + col);
-	}
-	if (tmp->width > tmp->precision && tmp->precision > colnum)
-		return (ft_write_zeroskip(tmp, colnum, str));
-	return (ft_putstr_fd(str, 1) + col);
+	width = ft_col_width(tmp, colnum, elem);
+	precision = ft_col_precision(tmp, colnum, elem);
+	if (elem == 0 && tmp->precision == 0)
+		return (ft_nado(width));
+	if (tmp->flag == '0')
+		n = '0';
+	else
+		n = ' ';
+	if (tmp->flag != '-')
+		ft_putchar(n, width);
+	ft_putchar('0', precision);
+	ft_putnbr_fd(elem, 1);
+	if (tmp->flag == '-')
+		ft_putchar(' ', width);
+	if (elem < 0)
+		return (width + precision + colnum + 1);
+	return (width + precision + colnum);
 }
 
+int		ft_type_id(list_t *tmp, va_list *ap)
+{
+	int		elem;
+	int		width;
+	int		precision;
+	char	n;
 
+	elem = va_arg(*ap, int);
+	n = ' ';
+	width = ft_col_width(tmp, (ft_colnum(elem)), elem);
+	precision = ft_col_precision(tmp, (ft_colnum(elem)), elem);
+	if (elem == 0 && tmp->precision == 0)
+		return (ft_nado(width));
+	if (tmp->flag == '0')
+		n = '0';
+	if (elem < 0 && tmp->flag == '0')
+		ft_putchar('-', 1);
+	if (tmp->flag != '-')
+		ft_putchar(n, width);
+	if (elem < 0 && tmp->flag != '0')
+		ft_putchar('-', 1);
+	ft_putchar('0', precision);
+	ft_putnbr_fd(elem, 1);
+	if (tmp->flag == '-')
+		ft_putchar(' ', width);
+	return (width + precision + (ft_colnum(elem)) + (elem < 0));
+}
 
 int		ft_processor(list_t *tmp, va_list *ap)
 {
@@ -94,8 +119,8 @@ int		ft_processor(list_t *tmp, va_list *ap)
 	i = 0;
 	if (tmp->flag == '0' && tmp->precision != -1)
 		tmp->flag = '\0';
-//	if (tmp->type == 'i' || tmp-> 'd')
-	//	i = ft_type_id(list_t *tmp, va_list *ap);
+	if (tmp->type == 'i' || tmp->type == 'd')
+		i = ft_type_id(tmp, ap);
 	if (tmp->type == 'u')
 		i = ft_type_u(tmp, ap);
 	if (tmp->type == 'c' || tmp->type == '%')
