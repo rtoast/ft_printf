@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_proces.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 09:23:01 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/06 22:18:30 by rtoast           ###   ########.fr       */
+/*   Updated: 2021/02/08 21:53:56 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,19 @@ int		ft_nado(int width)
 		width++;
 	ft_putchar(' ', width);
 	return (width);
+}
+
+int		ft_width_s(list_t *tmp, int colnum)
+{
+	int	size;
+
+	if (tmp->precision == 0)
+		return (tmp->width);
+	if (tmp->precision > colnum || tmp->precision == -1)
+		size = tmp->width - colnum;
+	else 
+		size = tmp->width - tmp->precision;
+	if (size < 0)
+		return (0);
+	return (size);
 }

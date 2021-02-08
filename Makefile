@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+         #
+#    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/28 14:42:19 by rtoast            #+#    #+#              #
-#    Updated: 2021/01/30 12:52:39 by rtoast           ###   ########.fr        #
+#    Updated: 2021/02/08 21:25:39 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 C_FILE = ft_parser.c ft_printf.c ft_proces.c ft_processor.c libfile.c\
-		 libfiletwo.c\
+		 libfiletwo.c ft_processor_2.0.c\
 		 main.c###############
 
 O_FILE = $(C_FILE:.c=.o)

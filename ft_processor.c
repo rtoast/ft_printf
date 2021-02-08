@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_processor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 18:54:09 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/06 22:32:30 by rtoast           ###   ########.fr       */
+/*   Updated: 2021/02/09 00:50:51 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		ft_type_u(list_t *tmp, va_list *ap)
 	int				precision;
 	char			n;
 
-	elem = va_arg(*ap, int);
+	elem = va_arg(*ap, unsigned int);
 	colnum = ft_colnum(elem);
 	width = ft_col_width(tmp, colnum, elem);
 	precision = ft_col_precision(tmp, colnum, elem);
@@ -125,11 +125,11 @@ int		ft_processor(list_t *tmp, va_list *ap)
 		i = ft_type_u(tmp, ap);
 	if (tmp->type == 'c' || tmp->type == '%')
 		i = ft_type_c_pro(tmp, ap);
-	//if (tmp->type == 's')
-	//	ft_type_s(list_t *tmp, va_list *ap);
+	if (tmp->type == 's')
+		i = ft_type_s(tmp, ap);
 	//if (tmp->type == 'p')
 		//ft_type_p(list_t *tmp, va_list *ap);
-	//if (tmp->type == 'x' || tmp->type == 'X')
-	//	ft_type_xX(list_t *tmp, va_list *ap);
+	if (tmp->type == 'x' || tmp->type == 'X')
+		i = ft_type_xX(tmp, ap);
 	return(i);
 }

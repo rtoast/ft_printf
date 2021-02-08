@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtoast <rtoast@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:51:12 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/06 22:23:10 by rtoast           ###   ########.fr       */
+/*   Updated: 2021/02/09 00:26:33 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_putchar(char n, int i);
 int		ft_col_precision(list_t *tmp, int colnum, long long elem);
 int		ft_col_width(list_t *tmp, int colnum, long long elem);
 int		ft_nado(int width);
-
+int		ft_type_s(list_t *tmp, va_list *ap);
+int		ft_width_s(list_t *tmp, int colnum);
+int		ft_type_xX(list_t *tmp, va_list *ap);
 
 #endif
