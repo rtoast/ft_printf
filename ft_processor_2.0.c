@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 20:36:09 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/09 01:43:56 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/09 16:33:22 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	ft_perevod(int ost, char x)
 	return (n);
 }
 
-void	ft_int_16(unsigned int elem, char x)
+void	ft_int_16(long long elem, char x)
 {
 	int		ost;
 	char	n;
@@ -101,7 +101,7 @@ void	ft_int_16(unsigned int elem, char x)
 	}
 }
 
-int		ft_colnum_16(unsigned int elem)
+int		ft_colnum_16(long long elem)
 {
 	int i;
 
@@ -145,4 +145,35 @@ int		ft_type_xX(list_t *tmp, va_list *ap)
 	if (elem < 0)
 		return (width + precision + colnum + 1);
 	return (width + precision + colnum);
+}
+
+int		ft_type_p(list_t *tmp, va_list *ap)
+{
+	
+	long unsigned int elem;
+	int				colnum;
+	int				width;
+	int				precision;
+	char			n;
+
+	elem = va_arg(*ap, long unsigned int);
+	colnum = ft_colnum_16(elem);
+	width = ft_col_width(tmp, colnum, elem);
+	precision = ft_col_precision(tmp, colnum, elem);
+	if (elem == 0 && tmp->precision == 0)
+		return (ft_nado(width));
+	if (tmp->flag == '0')
+		n = '0';
+	else
+		n = ' ';
+	if (tmp->flag != '-')
+		ft_putchar(n, width);
+	ft_putchar('0', precision);
+	write (1, "0x", 2);
+	if (elem == 0)
+		write (1, "0", 1);
+	ft_int_16(elem, tmp->type);
+	if (tmp->flag == '-')
+		ft_putchar(' ', width);
+	return (width + precision + colnum + 2);
 }

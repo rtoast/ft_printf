@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 14:51:12 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/09 00:26:33 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/09 16:03:07 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int		ft_nado(int width);
 int		ft_type_s(list_t *tmp, va_list *ap);
 int		ft_width_s(list_t *tmp, int colnum);
 int		ft_type_xX(list_t *tmp, va_list *ap);
+int		ft_type_p(list_t *tmp, va_list *ap);
 
 #endif

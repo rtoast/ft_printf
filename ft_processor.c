@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 18:54:09 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/09 00:50:51 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/09 15:58:55 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int		ft_processor(list_t *tmp, va_list *ap)
 		i = ft_type_c_pro(tmp, ap);
 	if (tmp->type == 's')
 		i = ft_type_s(tmp, ap);
-	//if (tmp->type == 'p')
-		//ft_type_p(list_t *tmp, va_list *ap);
+	if (tmp->type == 'p')
+		i = ft_type_p(tmp, ap);
 	if (tmp->type == 'x' || tmp->type == 'X')
 		i = ft_type_xX(tmp, ap);
 	return(i);

@@ -6,17 +6,20 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 09:23:01 by rtoast            #+#    #+#             */
-/*   Updated: 2021/02/08 21:53:56 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/02/09 16:10:49 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "stdio.h"
 
 int		ft_col_width(list_t *tmp, int colnum, long long elem)
 {
 	int res;
 
 	res = tmp->width;
+	if (tmp->type == 'p')
+		res = res - 2;
 	if (elem < 0)
 		res--;
 	if (tmp->precision > colnum)
